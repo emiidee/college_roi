@@ -1,0 +1,9 @@
+{
+  "name": "college-roi",
+  "description": "college roi visualized by d3",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.1.1"
+  }
+}
