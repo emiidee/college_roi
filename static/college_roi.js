@@ -13,8 +13,9 @@ var x = d3.scale.linear()
     .range([0, width]);
 
 d3.csv('/data_clean.csv', function(error, data) {
-    // x.domain([0, d3.max(data, function(d){return d['20netroi'];})])
-    x.domain([0, 1094000]);
+    // todo: fix the max of x to match the current variable, keep in mind min
+    // of negative values
+    x.domain([0, d3.max(data, function(d){return +d['20netroi'];})])
 
     var chart = d3.select(".chart")
         .attr("width", width)
