@@ -1,14 +1,9 @@
-/* your beautiful css styling goes here! */
+/* CSS */
 
-/* Note: an asteroid image is included in this repo.
-Feel free to use it if you like. */
-
-#chart rect {
-  fill: steelblue;
+*{
+  font-family: sans-serif;
 }
 
-#chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
+.title {
+  text-align: center;
 }

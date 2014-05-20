@@ -4,7 +4,7 @@ var
   aid = 'withoutAid';
   roi = 'netROI';
 
-// Load data using data_parse.js
+// Load data using d3,see data_parse.js
 data
   .then(function(d){
     // Choose the data column to chart
@@ -30,7 +30,8 @@ data
         ],
         type: 'bar',
         groups: [
-          ['Cost', major] // ERROR: Negative values are stacked
+          // ['Cost', major] // ERROR: Negative values are stacked
+          [major, 'Cost']
         ]
       },
       tooltip: {
@@ -57,7 +58,10 @@ data
             format: d3.format('$,')
           }
         }
-      }
+      },
+      // subchart: {
+      //   show: true
+      // }
     });
     
   });
@@ -72,10 +76,11 @@ BASIC REQUIREMENTS
 [x] Convert to vertical bars
 [x] On hover of a bar, display attributes of that School
 [ ] Sort (auto or sort button?)
-[ ] Display cost as a stack
-[ ] Drop down to select all or major data
+[ ] Search for school, highlight that bar
+[x] Display cost as a stack
 
 EXTRA CREDIT
+[ ] Drop down to select all or major data
 [ ] Use nests to categorize data
 [ ] Toggle 20 year net roi or annual roi
 [ ] Toggle for seeing values with or without aid
