@@ -1,4 +1,5 @@
 // Declare variables
+<<<<<<< HEAD
 var
   // Chart settings
   width = 960;
