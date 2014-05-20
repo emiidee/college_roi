@@ -1,9 +1,5 @@
-// Declare variables
+// Data toggles variables
 var
-  // Chart settings
-  width = 960;
-  height = 500;
-  // Data toggles
   major = 'all';
   aid = 'withoutAid';
   roi = 'netROI';
@@ -22,7 +18,7 @@ data
     var chart = c3.generate({
       bindto: '#chart',
       data: {
-        columns: [['data'].concat(colData)],
+        columns: [[major].concat(colData)],
         type: 'bar'
       },
       grid: {
@@ -42,15 +38,13 @@ data
 /*
 BASIC REQUIREMENTS
 [x] Convert to vertical bars
-[ ] On hover of a bar...
-[ ]   Add fish eye on hover
-[ ]   Display attributes of that School
+[ ] On hover of a bar, display attributes of that School
 [ ] Sort (auto or sort button?)
 [ ] Display cost as a stack
+[ ] Drop down to select all or major data
 
 EXTRA CREDIT
 [ ] Use nests to categorize data
-[ ] Drop down to select all or major data
 [ ] Toggle 20 year net roi or annual roi
 [ ] Toggle for seeing values with or without aid
 [ ] Drop down for sort by category
@@ -59,6 +53,7 @@ EXTRA CREDIT
 
 NIGHTMARE MODE!
 [ ] Incorporate crossfilter to show portions of data at a time (http://square.github.io/crossfilter/)
+[ ] Add fish eye on hover of a bar
 
 CLEAN UP TIME
 [ ] Clean data 
