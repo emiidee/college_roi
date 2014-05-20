@@ -9,6 +9,10 @@ body {
   text-align: center;
 }
 
+.navbar-form label {
+  margin-right: 10px;
+}
+
 #chart {
   margin: 20px 0px 50px 0px;
 }
