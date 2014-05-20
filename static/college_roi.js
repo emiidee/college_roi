@@ -31,7 +31,7 @@ d3.csv('/data.csv', type, function(error, data) {
   .enter().append("g")
     .attr("transform", function(d, i) { return "translate(" + i * barWidth + ", 0)"; });
   bar.append("rect")
-    .attr("y", function(d) { console.log(y(0)); return y(0); })
+    .attr("y", function(d) { return y(0); })
     .attr("width", barWidth)
     .attr("height", 0) // should start at height 0
   .transition().duration(2000)
