@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/static'));
 
 app.get ('/', function(request, response) {
@@ -11,7 +12,7 @@ app.get ('/', function(request, response) {
 });
 
 app.get ('/data.csv', function(request, response) {
-  response.sendfile('/data_clean.csv');
+  response.sendfile('/data.csv');
 });
 
 var server = app.listen(3000, function() {
