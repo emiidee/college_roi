@@ -2,14 +2,60 @@
 <html>
   <head>
     <link rel='stylesheet' href='styles.css'>
+    <link rel='stylesheet' href='../bower_components/bootstrap/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='../bower_components/c3/c3.css'>
   </head>
   <body>
+    <div id="wrap">
 
-    <h1 class='title'>Which Colleges Are Worth the Price Tag?</h1>    
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+          <a class="navbar-brand" href="#">Data options:</a>
+          <ul class="nav navbar-nav">
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+          </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Filter by Major">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+      </nav>
 
-    <div id="chart"></div>
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="page-header">
+          <h1 class='title'>Which Colleges Are Worth the Price Tag?</h1>
+        </div>
+        <p class="lead">Talk a bit about the purpose of this project and give some takeaways blahblahblah</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div id="chart"></div>
 
+      <!-- Footnotes -->
+      <div class="container">
+        <p class="">Data was sourced from the <a href="http://www.payscale.com/college-roi/">2014 PayScale College ROI Report</a>. For details on how the numbers were sourced and calculated, please see <a href="http://www.payscale.com/data-packages/college-roi-2013/methodology">PayScale's methodology page</a>.</p>
+      </div>
+
+      <div id="push"></div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">Created by <a href="http://emilydee.com">Emily Dong</a></p>
+        <!-- #TODO social share buttons, link to github repo -->
+      </div>
+    </div>
+
+
+
+    <!-- Scripts -->
     <script src="../bower_components/bluebird/js/browser/bluebird.js" charset="utf-8"></script>
     <script src="../bower_components/d3/d3.min.js" charset="utf-8"></script>
     <script src="../bower_components/d3-plugins/fisheye/fisheye.js" charset="utf-8"></script>
@@ -17,13 +63,5 @@
     <script src="../bower_components/underscore/underscore.js" charset="utf-8"></script>
     <script src="data_parse.js"></script>
     <script src="college_roi.js"></script>
-
-
-    <!-- necessary footnotes -->
-    <!-- link to payscale data -->
-    <!-- link to payscale methodology
-    http://www.payscale.com/data-packages/college-roi-2013/methodology-->
-    <!-- social share buttons, link to github repo -->
-    <!-- comments plugin? -->
   </body>
 </html>
