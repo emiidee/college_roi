@@ -3,11 +3,11 @@
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
 
-.chart rect {
+#chart rect {
   fill: steelblue;
 }
 
-.chart text {
+#chart text {
   fill: white;
   font: 10px sans-serif;
   text-anchor: end;
