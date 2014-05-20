@@ -1,45 +1,51 @@
 // Declare variables
-var width = 1000;
-  barHeight = 10;
+var
+  // Chart settings
+  width = 960;
+  height = 500;
+  // Data toggles
   major = 'all';
   aid = 'withoutAid';
   roi = 'annualROI';
 
+// Set size of the SVG object with class .chart
+var chart = d3.select(".chart")
+  .attr("width", width)
+  .attr("height", height);
+
+// Import data
 d3.csv('/data.csv', type, function(error, data) {
   console.log(data); // #REMOVE
+  // var value = d[aid][roi][major];
 
   // Scale data range to fit in SVG object
-  var x = d3.scale.linear()
+  var y = d3.scale.linear()
     .domain(d3.extent(data, function(d){return d[aid][roi][major];}))
-    .range([0, width]);
-
-  console.log(d3.extent(data, function(d){return d[aid][roi][major];})); // #REMOVE console logs range
-
-  // Set size of the SVG object with class .chart
-  var chart = d3.select(".chart")
-    .attr("width", width)
-    .attr("height", barHeight * data.length);
+    .range([height, 0]);
 
   // Put bars on the page
+  var barWidth = width / data.length;
+
   var bar = chart.selectAll("g")
     .data(data)
   .enter().append("g")
-    .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
-  // Size the height of the bars based on a data attribute
+    .attr("transform", function(d, i) { return "translate(" + i * barWidth + ", 0)"; });
   bar.append("rect")
-    .attr("x", function(d) { return x(Math.min(0, d[aid][roi][major])); })
-    .attr("width", 0)
-    .attr("height", barHeight - 1) // with gap
-  .transition().duration(800)
-    .ease(d3.ease('bounce'))
-    .attr("width", function(d){ return Math.abs(x(d[aid][roi][major]) - x(0));});
+    .attr("y", function(d) { console.log(y(0)); return y(0); })
+    .attr("width", barWidth)
+    .attr("height", 0) // should start at height 0
+  .transition().duration(2000)
+    .ease(d3.ease('linear'))
+    .attr("y", function(d) { return y(Math.max(0, d[aid][roi][major])); })
+    .attr("height", function(d){ return Math.abs(y(d[aid][roi][major]) - y(0));});
 
   // Label bars
-  bar.append("text")
-    .attr("x", function(d) { return x(d[aid][roi][major]) - 3; })
-    .attr("y", barHeight / 2)
-    .attr("dy", ".35em")
-    .text(function(d) { return d.school; });
+  // bar.append("text")
+  //   .attr("y", function(d, i) { return y(d[aid][roi][major]) - 3; })
+  //   .attr("x", barWidth * i)
+  //   .attr("dx", ".35em")
+  //   .attr("rotate", -20)
+  //   .text(function(d) { return d.school; });
   
 });
 
@@ -92,39 +98,27 @@ function majorData(typeFunc, data, suffix) {
 
 /*
 BASIC REQUIREMENTS
-Convert to vertical bars
-Use nests to categorize data
-On hover of a bar...
-  Add fish eye on hover
-  Display attributes of that School
-Sort (auto or sort button?)
-Display cost as a stack
+[x] Convert to vertical bars
+[ ] On hover of a bar...
+[ ]   Add fish eye on hover
+[ ]   Display attributes of that School
+[ ] Sort (auto or sort button?)
+[ ] Display cost as a stack
 
 EXTRA CREDIT
-Drop down to select all or major data
-Toggle 20 year net roi or annual roi
-Toggle for seeing values with or without aid
-Drop down for sort by category
-On click of a bar...
-  Open up school website on a new page (or Collegeboard website?)
+[ ] Use nests to categorize data
+[ ] Drop down to select all or major data
+[ ] Toggle 20 year net roi or annual roi
+[ ] Toggle for seeing values with or without aid
+[ ] Drop down for sort by category
+[ ] On click of a bar...
+[ ]   Open up school website on a new page (or Collegeboard website?)
 
 NIGHTMARE MODE!
-Incorporate crossfilter to show portions of data at a time (http://square.github.io/crossfilter/)
+[ ] Incorporate crossfilter to show portions of data at a time (http://square.github.io/crossfilter/)
 
 CLEAN UP TIME
-Clean data 
-Push live
-Add readme
+[ ] Clean data 
+[ ] Push live
+[ ] Add readme
 */
-
-
-
-
-
-
-
-
-
-
-
-
