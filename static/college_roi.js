@@ -1,6 +1,6 @@
 // Data toggles variables
 var
-  major = 'All Majors';
+  major = 'Computer Science';
   aid = 'withoutAid';
   roi = 'netROI';
 
@@ -12,28 +12,33 @@ data
       .pluck(aid)
       .pluck(roi)
       .pluck(major)
+      .filter(function(val) { return val !== undefined; })
       .value();
 
     var cost = _.chain(d)
       .pluck(aid)
+      .filter(function(val) { return val[roi][major] !== undefined; })
       .pluck('cost')
-      .map(function(num) { return -num; })
+      // .map(function(num) { return -num; }) // Make cost a negative value
       .value();
 
     // Append chart to div
     var chart = c3.generate({
       bindto: '#chart',
+      
       data: {
         columns: [
-          [major].concat(colData),
           ['Cost'].concat(cost),
+          ['20yr Net ROI of ' + major].concat(colData),
         ],
         type: 'bar',
         groups: [
           // ['Cost', major] // ERROR: Negative values are stacked
-          [major, 'Cost']
-        ]
+          ['20yr Net ROI of ' + major, 'Cost']
+        ],
+        order: null
       },
+
       tooltip: {
         format: {
           title: function(i) { return d[i].school; },
@@ -43,6 +48,8 @@ data
           }
         }
       },
+
+      // Chart Formatting
       grid: {
         y: { // For negative values
           lines: [{value: 0}]
@@ -59,6 +66,9 @@ data
           }
         }
       },
+      padding: {
+        bottom: 20
+      }
       // subchart: {
       //   show: true
       // }
@@ -76,11 +86,11 @@ BASIC REQUIREMENTS
 [x] Convert to vertical bars
 [x] On hover of a bar, display attributes of that School
 [ ] Sort (auto or sort button?)
-[ ] Search for school, highlight that bar
+[ ] Search for school, highlight that bar, use typeahead
+[ ] Filter by major data
 [x] Display cost as a stack
 
 EXTRA CREDIT
-[ ] Drop down to select all or major data
 [ ] Use nests to categorize data
 [ ] Toggle 20 year net roi or annual roi
 [ ] Toggle for seeing values with or without aid
