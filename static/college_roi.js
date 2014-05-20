@@ -7,8 +7,11 @@ d3.csv('/data_clean.csv', function(error, data) {
     // of negative values
     // Scale data range to fit in SVG object
     var x = d3.scale.linear()
-        .range([0, width])
-        .domain([0, d3.max(data, function(d){return +d['20netroi'];})]);
+        .domain(d3.extent(data, function(d){return +d['20netroi_aid'];}))
+        .range([0, width]);
+        // .domain([0, d3.max(data, function(d){return +d['20netroi_aid'];})]);
+
+    console.log(d3.extent(data, function(d){return +d['20netroi_aid'];}));
 
     // Set size of the SVG object with class .chart
     var chart = d3.select(".chart")
@@ -22,8 +25,12 @@ d3.csv('/data_clean.csv', function(error, data) {
         .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
     // Size the height of the bars based on a data attribute
     bar.append("rect")
-        .attr("width", function(d){ return x(d['20netroi_aid']);})
-        .attr("height", barHeight - 1);
+        .attr("x", function(d) { return x(Math.min(0, d['20netroi_aid'])); })
+        .attr("width", 0)
+        .attr("height", barHeight - 1) // with gap
+    .transition().duration(800)
+        .ease(d3.ease('bounce'))
+        .attr("width", function(d){ return Math.abs(x(d['20netroi_aid']) - x(0));});
 
     // Label bars
     bar.append("text")
