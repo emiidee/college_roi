@@ -14,15 +14,24 @@ data
       .pluck(major)
       .value();
 
+    var cost = _.chain(d)
+      .pluck(aid)
+      .pluck('cost')
+      .map(function(num) { return -num; })
+      .value();
+
     // Append chart to div
     var chart = c3.generate({
       bindto: '#chart',
       data: {
         columns: [
           [major].concat(colData),
-
+          ['Cost'].concat(cost),
         ],
-        type: 'bar'
+        type: 'bar',
+        groups: [
+          ['Cost', major] // ERROR: Negative values are stacked
+        ]
       },
       tooltip: {
         format: {
