@@ -17,6 +17,7 @@
   "dependencies": {
     "d3": "~3.4.8",
     "underscore": "~1.6.0",
-    "d3-plugins": "*"
+    "d3-plugins": "*",
+    "c3": "~0.1.42"
   }
 }
