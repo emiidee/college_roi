@@ -29,14 +29,19 @@ data
       data: {
         columns: [
           ['Cost'].concat(cost),
-          ['20yr Net ROI of ' + major].concat(colData),
+          ['Major'].concat(colData),
         ],
         type: 'bar',
+        colors: {
+          Cost: '#ff7f0e',
+          Major: '#1f77b4'
+        },
         groups: [
-          // ['Cost', major] // ERROR: Negative values are stacked
-          ['20yr Net ROI of ' + major, 'Cost']
+          ['Major', 'Cost']
         ],
-        order: null
+        names: {
+          Major: '20yr Net ROI of ' + major + ' Majors'
+        }
       },
 
       tooltip: {
@@ -69,9 +74,6 @@ data
       padding: {
         bottom: 20
       }
-      // subchart: {
-      //   show: true
-      // }
     });
     
   });
