@@ -45,3 +45,46 @@ d3.csv('/data_clean.csv', function(error, data) {
 //   d.20netroi = +d.20netroi; // coerce to number
 //   return d;
 // }
+
+
+// Brainstorm
+
+// BASIC REQUIREMENTS
+// Add negative values
+// Use nests to categorize data
+// On hover of a bar...
+    // Add fish eye on hover
+    // Display attributes of that School
+// Sort (auto or sort button?)
+
+
+// EXTRA CREDIT
+// Drop down to select all or major data
+// Toggle 20 year net roi or annual roi
+// Toggle for seeing values with or without aid
+// Drop down for sort by category
+// Display cost as a stack
+// On click of a bar...
+    // Open up school website on a new page (or Collegeboard website?)
+
+// NIGHTMARE MODE!
+// Incorporate crossfilter to show portions of data at a time (http://square.github.io/crossfilter/)
+
+
+// Todo
+// Clean data 
+// Push live
+// Add readme
+
+
+
+
+
+
+
+
+
+
+
+
+
