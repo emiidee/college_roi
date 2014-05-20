@@ -1,6 +1,6 @@
 // Data toggles variables
 var
-  major = 'all';
+  major = 'All Majors';
   aid = 'withoutAid';
   roi = 'netROI';
 
@@ -18,12 +18,35 @@ data
     var chart = c3.generate({
       bindto: '#chart',
       data: {
-        columns: [[major].concat(colData)],
+        columns: [
+          [major].concat(colData),
+
+        ],
         type: 'bar'
       },
+      tooltip: {
+        format: {
+          title: function(i) { return d[i].school; },
+          value: function(value) {
+            var format = roi === 'netROI' ? d3.format('$,') : d3.format('.');
+              return format(value);
+          }
+        }
+      },
       grid: {
-        y: {
+        y: { // For negative values
           lines: [{value: 0}]
+        }
+      },
+      axis: {
+        x: {
+          show: false,
+        },
+        y: {
+          show: true,
+          tick: {
+            format: d3.format('$,')
+          }
         }
       }
     });
@@ -38,7 +61,7 @@ data
 /*
 BASIC REQUIREMENTS
 [x] Convert to vertical bars
-[ ] On hover of a bar, display attributes of that School
+[x] On hover of a bar, display attributes of that School
 [ ] Sort (auto or sort button?)
 [ ] Display cost as a stack
 [ ] Drop down to select all or major data
