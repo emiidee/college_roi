@@ -9,16 +9,32 @@ body {
   text-align: center;
 }
 
-.navbar-form label {
-  margin-right: 10px;
+#active-major {
+  width: 200px;
+  /*float: left;*/
+}
+
+#nav-filter button {
+  /*float: left;*/
+  margin: 0px 0px 10px 10px;
 }
 
 #chart {
   margin: 20px 0px 50px 0px;
 }
 
+.filters {
+  margin-top: 20px;
+}
+
 .container .credit {
   margin: 20px 0;
+  text-align: center;
+}
+
+.instructions {
+  font-size: 16px;
+  margin-bottom: 0px;
 }
 
 .footnote {

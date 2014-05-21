@@ -89,7 +89,7 @@ data
         ],
       });
       $('#active-major').text(major + ' Majors');
-      e.preventDefault();
+      // e.preventDefault();
     });
 
   });
