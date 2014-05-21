@@ -20,6 +20,7 @@
     "d3-plugins": "*",
     "c3": "~0.1.42",
     "bluebird": "~1.2.4",
-    "bootstrap": "~3.1.1"
+    "bootstrap": "~3.1.1",
+    "jquery": "~2.1.1"
   }
 }
