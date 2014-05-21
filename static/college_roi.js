@@ -1,26 +1,14 @@
 // Data toggles variables
-var
-  major = 'Computer Science';
-  aid = 'withoutAid';
-  roi = 'netROI';
+var major = 'All';
+var aid = 'withoutAid';
+var roi = 'netROI';
 
 // Load data using d3,see data_parse.js
 data
   .then(function(d){
-    // Choose the data column to chart
-    var colData = _.chain(d)
-      .pluck(aid)
-      .pluck(roi)
-      .pluck(major)
-      .filter(function(val) { return val !== undefined; })
-      .value();
-
-    var cost = _.chain(d)
-      .pluck(aid)
-      .filter(function(val) { return val[roi][major] !== undefined; })
-      .pluck('cost')
-      // .map(function(num) { return -num; }) // Make cost a negative value
-      .value();
+    // Get data
+    var colData = parseMajor(d);
+    var cost = parseCost(d);
 
     // Append chart to div
     var chart = c3.generate({
@@ -40,8 +28,12 @@ data
           ['Major', 'Cost']
         ],
         names: {
-          Major: '20yr Net ROI of ' + major + ' Majors'
+          Major: '20yr Net ROI'
         }
+      },
+
+      transition: {
+        duration: 800
       },
 
       tooltip: {
@@ -75,8 +67,55 @@ data
         bottom: 20
       }
     });
-    
+
+    return [chart, d];
+  })
+  .then(function(args) { // What is d?
+    // Set listener for the major filter
+    $('#nav-filter').submit(function(e) {
+      var chart = args[0];
+      var data = args[1];
+
+      major = $('#major').val(); // Reset global major variable
+      // Reset financial 'aid' variable
+      // Reload data
+      var colData = parseMajor(data);
+      var cost = parseCost(data);
+      chart.load({
+        unload: ['Cost', 'Major'],
+        columns: [
+          ['Cost'].concat(cost),
+          ['Major'].concat(colData),
+        ],
+      });
+      $('#active-major').text(major + ' Majors');
+      e.preventDefault();
+    });
+
   });
+  
+
+//***************************************************************
+// Helper Functions
+//***************************************************************
+
+function parseMajor(d) {
+  return colData = _.chain(d)
+    .pluck(aid)
+    .pluck(roi)
+    .pluck(major)
+    .filter(function(val) { return val !== undefined; })
+    .value();
+}
+
+function parseCost(d) {
+  return cost = _.chain(d)
+    .pluck(aid)
+    .filter(function(val) { return val[roi][major] !== undefined; })
+    .pluck('cost')
+    // .map(function(num) { return -num; }) // Make cost a negative value
+    .value();
+}
 
 
 //***************************************************************
@@ -89,7 +128,7 @@ BASIC REQUIREMENTS
 [x] On hover of a bar, display attributes of that School
 [ ] Sort (auto or sort button?)
 [ ] Search for school, highlight that bar, use typeahead
-[ ] Filter by major data
+[x] Filter by major data
 [x] Display cost as a stack
 
 EXTRA CREDIT

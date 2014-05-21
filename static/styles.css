@@ -21,6 +21,11 @@ body {
   margin: 20px 0;
 }
 
+.footnote {
+  color: #777;
+  font-style: italic;
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
