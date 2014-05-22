@@ -1,9 +1,24 @@
+<<<<<<< HEAD
 // Data toggles variables
 var major = 'All';
 var aid = 'withoutAid';
 var roi = 'netROI';
 
 // Load data using d3,see data_parse.js
+=======
+// Declare variables
+<<<<<<< HEAD
+var
+  // Chart settings
+  width = 960;
+  height = 500;
+  // Data toggles
+  major = 'all';
+  aid = 'withoutAid';
+  roi = 'netROI';
+
+// Load data using data_parse.js
+>>>>>>> 8a52f87066c07c6217668aa1c4e55fd427ac4ea6
 data
   .then(function(d){
     // Get data
@@ -107,7 +122,7 @@ data
     // });
 
   });
-  
+
 
 //***************************************************************
 // Helper Functions
