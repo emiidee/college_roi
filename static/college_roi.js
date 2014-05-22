@@ -71,12 +71,12 @@ data
     return [chart, d];
   })
   .then(function(args) { // What is d?
-    // Set listener for the major filter
-    $('#nav-filter').submit(function(e) {
-      var chart = args[0];
-      var data = args[1];
+    var chart = args[0];
+    var data = args[1];
 
-      major = $('#major').val(); // Reset global major variable
+    // Set listener for the major filter
+    $('#major-filter').submit(function(e) {
+      major = $('#active-major').val(); // Reset global major variable
       // Reset financial 'aid' variable
       // Reload data
       var colData = parseMajor(data);
@@ -89,8 +89,22 @@ data
         ],
       });
       $('#active-major').text(major + ' Majors');
-      // e.preventDefault();
+      e.preventDefault();
     });
+
+    // Listener to highlight current school
+    // $('#school-filter').submit(function(e) {
+    //   var school = $('#active-school').val();
+    //   chart.load({
+    //     unload: ['Cost', 'Major'],
+    //     columns: [
+    //       ['Cost'].concat(cost),
+    //       ['Major'].concat(colData),
+    //     ],
+    //   });
+    //   $('#active-major').text(major + ' Majors');
+    //   e.preventDefault();
+    // });
 
   });
   
