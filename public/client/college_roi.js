@@ -2,6 +2,20 @@
 var major = 'All';
 var aid = 'withoutAid';
 var roi = 'netROI';
+var majors = [
+  'All',
+  'Art',
+  'Business',
+  'Computer Science',
+  'Economics',
+  'Education',
+  'English',
+  'Humanities',
+  'Life Sciences',
+  'Mathematics',
+  'Nursing',
+  'Political Science',
+];
 
 $(function () {
   // Load data using d3,see data_parse.js
@@ -55,10 +69,8 @@ $(function () {
       // });
 
     });
-
-  var majors = ['Art', 'Humanities', 'Computer Science', 'Mathematics', 'Business', 'Economics', 'Nursing', 'Life Sciences', 'Political Science', 'English', 'Education', 'All'
-  ];
-   
+  
+  // Typeahead
   $('#major-filter .typeahead').typeahead({
     hint: true,
     highlight: true,
