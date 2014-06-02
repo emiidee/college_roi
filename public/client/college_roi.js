@@ -8,6 +8,7 @@ $(function () {
   data
     .then(function(d){
       // Get data
+      d.sort(majorSort);
       var cost = parseCost(d);
       var colData = parseMajor(d, cost);
 
@@ -82,6 +83,14 @@ $(function () {
         // Reload data
         var cost = parseCost(data);
         var colData = parseMajor(data, cost);
+
+        // Filter undefined data
+        var d = _.filter(data, function(datum){
+          return datum[aid][roi][major] !== undefined;
+        });
+
+        //sort data by major
+        d.sort(majorSort);
         chart.load({
           unload: ['Cost', 'Major'],
           columns: [
@@ -171,6 +180,16 @@ function parseCost(d) {
     .value();
 }
 
+function majorSort(a, b) {
+  var diff =  (b[aid][roi][major] + b[aid].cost) - (a[aid][roi][major] + a[aid].cost);
+  if (diff > 0) {
+    return 1;
+  } else if (diff < 0) {
+    return -1;
+  } else {
+    return 0;
+  }
+} 
 
 //***************************************************************
 // Brainstorm
