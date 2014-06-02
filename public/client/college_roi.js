@@ -12,62 +12,7 @@ $(function () {
       var colData = parseMajor(d);
 
       // Append chart to div
-      var chart = c3.generate({
-        bindto: '#chart',
-        
-        data: {
-          columns: [
-            ['Cost'].concat(cost),
-            ['Major'].concat(colData),
-          ],
-          type: 'bar',
-          colors: {
-            Cost: '#ff7f0e',
-            Major: '#1f77b4'
-          },
-          groups: [
-            ['Major', 'Cost']
-          ],
-          names: {
-            Major: '20yr Net ROI'
-          }
-        },
-
-        transition: {
-          duration: 800
-        },
-
-        tooltip: {
-          format: {
-            title: function(i) { return (i+1) + '. ' + d[i].school; },
-            value: function(value) {
-              var format = roi === 'netROI' ? d3.format('$,') : d3.format('.');
-                return format(value);
-            }
-          }
-        },
-
-        // Chart Formatting
-        grid: {
-          y: { // For negative values
-            lines: [{value: 0}]
-          }
-        },
-        axis: {
-          x: {
-            show: false,
-          },
-          y: {
-            show: true,
-            tick: {
-              format: d3.format('$,')
-            }
-          }
-        },
-        padding: {
-          bottom: 20
-        }
-      });
+      var chart = genChart(d, cost, colData);
 
       return [chart, d];
     })
@@ -90,22 +35,7 @@ $(function () {
         d.sort(majorSort);
         var cost = parseCost(d);
         var colData = parseMajor(d);
-        chart.load({
-          unload: ['Cost', 'Major'],
-          columns: [
-            ['Cost'].concat(cost),
-            ['Major'].concat(colData),
-          ],
-          tooltip: {
-            format: {
-              title: function(i) { return (i+1) + '. ' + d[i].school; },
-              value: function(value) {
-                var format = roi === 'netROI' ? d3.format('$,') : d3.format('.');
-                  return format(value);
-              }
-            }
-          },
-        });
+        genChart(d, cost, colData);
         $('#active-major').text(major + ' Majors');
         e.preventDefault();
       });
@@ -196,7 +126,66 @@ function majorSort(a, b) {
   } else {
     return 0;
   }
-} 
+}
+
+function genChart(d, cost, colData) {
+  c3.generate({
+    bindto: '#chart',
+    
+    data: {
+      columns: [
+        ['Cost'].concat(cost),
+        ['Major'].concat(colData),
+      ],
+      type: 'bar',
+      colors: {
+        Cost: '#ff7f0e',
+        Major: '#1f77b4'
+      },
+      groups: [
+        ['Major', 'Cost']
+      ],
+      names: {
+        Major: '20yr Net ROI'
+      }
+    },
+
+    transition: {
+      duration: 800
+    },
+
+    tooltip: {
+      format: {
+        title: function(i) { return (i+1) + '. ' + d[i].school; },
+        value: function(value) {
+          var format = roi === 'netROI' ? d3.format('$,') : d3.format('.');
+            return format(value);
+        }
+      }
+    },
+
+    // Chart Formatting
+    grid: {
+      y: { // For negative values
+        lines: [{value: 0}]
+      }
+    },
+    axis: {
+      x: {
+        show: false,
+      },
+      y: {
+        show: true,
+        tick: {
+          format: d3.format('$,')
+        }
+      }
+    },
+    padding: {
+      bottom: 20
+    }
+  });
+}
 
 //***************************************************************
 // Brainstorm
