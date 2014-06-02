@@ -7,10 +7,9 @@ $(function () {
   // Load data using d3,see data_parse.js
   data
     .then(function(d){
-      // Get data
       d.sort(majorSort);
       var cost = parseCost(d);
-      var colData = parseMajor(d, cost);
+      var colData = parseMajor(d);
 
       // Append chart to div
       var chart = c3.generate({
@@ -72,7 +71,7 @@ $(function () {
 
       return [chart, d];
     })
-    .then(function(args) { // What is d?
+    .then(function(args) {
       var chart = args[0];
       var data = args[1];
 
@@ -81,8 +80,6 @@ $(function () {
         major = $('#active-major').val(); // Reset global major variable
         // Reset financial 'aid' variable
         // Reload data
-        var cost = parseCost(data);
-        var colData = parseMajor(data, cost);
 
         // Filter undefined data
         var d = _.filter(data, function(datum){
@@ -91,12 +88,23 @@ $(function () {
 
         //sort data by major
         d.sort(majorSort);
+        var cost = parseCost(d);
+        var colData = parseMajor(d);
         chart.load({
           unload: ['Cost', 'Major'],
           columns: [
             ['Cost'].concat(cost),
             ['Major'].concat(colData),
           ],
+          tooltip: {
+            format: {
+              title: function(i) { return (i+1) + '. ' + d[i].school; },
+              value: function(value) {
+                var format = roi === 'netROI' ? d3.format('$,') : d3.format('.');
+                  return format(value);
+              }
+            }
+          },
         });
         $('#active-major').text(major + ' Majors');
         e.preventDefault();
@@ -161,13 +169,12 @@ $(function () {
 // Helper Functions
 //***************************************************************
 
-function parseMajor(d, cost) {
+function parseMajor(d) {
   return _.chain(d)
     .pluck(aid)
     .pluck(roi)
     .pluck(major)
     .filter(function(val) { return val !== undefined; })
-    .map(function(val, i) { return val - cost[i]; })
     .value();
 }
 
