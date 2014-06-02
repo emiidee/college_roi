@@ -8,8 +8,8 @@ $(function () {
   data
     .then(function(d){
       // Get data
-      var colData = parseMajor(d);
       var cost = parseCost(d);
+      var colData = parseMajor(d, cost);
 
       // Append chart to div
       var chart = c3.generate({
@@ -80,8 +80,8 @@ $(function () {
         major = $('#active-major').val(); // Reset global major variable
         // Reset financial 'aid' variable
         // Reload data
-        var colData = parseMajor(data);
         var cost = parseCost(data);
+        var colData = parseMajor(data, cost);
         chart.load({
           unload: ['Cost', 'Major'],
           columns: [
@@ -152,12 +152,13 @@ $(function () {
 // Helper Functions
 //***************************************************************
 
-function parseMajor(d) {
+function parseMajor(d, cost) {
   return _.chain(d)
     .pluck(aid)
     .pluck(roi)
     .pluck(major)
     .filter(function(val) { return val !== undefined; })
+    .map(function(val, i) { return val - cost[i]; })
     .value();
 }
 
