@@ -76,10 +76,9 @@ input[type="text"] {
     padding: 3px 20px;
 }
 
-.tt-suggestion.tt-is-under-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
+.tt-suggestion.tt-cursor {
     color: #fff;
-    background-color: #0097cf;
-
+    background-color: #428bca;
 }
 
 .tt-suggestion p {
