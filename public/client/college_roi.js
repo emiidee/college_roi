@@ -39,7 +39,7 @@ $(function () {
 
         tooltip: {
           format: {
-            title: function(i) { return d[i].school; },
+            title: function(i) { return i + '. ' + d[i].school; },
             value: function(value) {
               var format = roi === 'netROI' ? d3.format('$,') : d3.format('.');
                 return format(value);
