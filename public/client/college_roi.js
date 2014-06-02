@@ -25,6 +25,9 @@ $(function () {
       var cost = parseCost(d);
       var colData = parseMajor(d);
 
+      // Set schools array for school search typeahead
+      setSchools(parseSchool(d));
+
       // Append chart to div
       var chart = genChart(d, cost, colData);
 
@@ -49,6 +52,11 @@ $(function () {
         d.sort(majorSort);
         var cost = parseCost(d);
         var colData = parseMajor(d);
+
+        // Reset typeahead list to current schools
+        setSchools(parseSchool(d));
+
+        // Regenerate Chart
         genChart(d, cost, colData);
         $('#active-major').text(major + ' Majors');
         e.preventDefault();
