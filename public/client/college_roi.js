@@ -133,7 +133,7 @@ $(function () {
     };
   };
    
-  var majors = ['Art', 'Humanities', 'Computer Science', 'Mathematics', 'Business', 'Economics', 'Nursing', 'Life Sciences', 'Political Science', 'History', 'English', 'Education', 'All'
+  var majors = ['Art', 'Humanities', 'Computer Science', 'Mathematics', 'Business', 'Economics', 'Nursing', 'Life Sciences', 'Political Science', 'English', 'Education', 'All'
   ];
    
   $('#major-filter .typeahead').typeahead({
