@@ -3,6 +3,15 @@
 // Helper Functions for college_roi.js
 //***************************************************************
 
+// Get schools list from data
+function parseSchool(d) {
+  return _.chain(d)
+    .pluck('school')
+    .filter(function(val) { return val !== undefined; })
+    .map(function(val, i) { return (i+1) + '. ' + val; })
+    .value();
+}
+
 // Get data for the selected major
 function parseMajor(d) {
   return _.chain(d)
@@ -118,4 +127,20 @@ function substringMatcher(strs) {
  
     cb(matches);
   };
-};
+}
+
+// Set typeahead list for schools
+function setSchools(schools) {
+  $('#school-filter .typeahead').typeahead('destroy');
+
+  $('#school-filter .typeahead').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+  },
+  {
+    name: 'schools',
+    displayKey: 'value',
+    source: substringMatcher(schools)
+  });
+}
