@@ -16,17 +16,21 @@ var majors = [
   'Nursing',
   'Political Science',
 ];
+var schools = [];
+var cost = [];
+var colData = [];
 
 $(function () {
   // Load data using d3,see data_parse.js
   data
     .then(function(d){
       d.sort(majorSort);
-      var cost = parseCost(d);
-      var colData = parseMajor(d);
+      cost = parseCost(d);
+      colData = parseMajor(d);
 
       // Set schools array for school search typeahead
-      setSchools(parseSchool(d));
+      schools = parseSchool(d);
+      setSchools(schools);
 
       // Append chart to div
       var chart = genChart(d, cost, colData);
@@ -36,25 +40,27 @@ $(function () {
     .then(function(args) {
       var chart = args[0];
       var data = args[1];
+      var yText = 10;
 
       // Set listener for the major filter
       $('#major-filter').submit(function(e) {
-        major = $('#active-major').val(); // Reset global major variable
-        // Reset financial 'aid' variable
-        // Reload data
+        // Reset global major variable
+        major = $('#active-major').val();
+        yText = 10;
 
         // Filter undefined data
         var d = _.filter(data, function(datum){
           return datum[aid][roi][major] !== undefined;
         });
 
-        //sort data by major
+        // Sort data by major
         d.sort(majorSort);
-        var cost = parseCost(d);
-        var colData = parseMajor(d);
+        cost = parseCost(d);
+        colData = parseMajor(d);
 
         // Reset typeahead list to current schools
-        setSchools(parseSchool(d));
+        schools = parseSchool(d);
+        setSchools(schools);
 
         // Regenerate Chart
         genChart(d, cost, colData);
@@ -63,18 +69,40 @@ $(function () {
       });
 
       // Listener to highlight current school
-      // $('#school-filter').submit(function(e) {
-      //   var school = $('#active-school').val();
-      //   chart.load({
-      //     unload: ['Cost', 'Major'],
-      //     columns: [
-      //       ['Cost'].concat(cost),
-      //       ['Major'].concat(colData),
-      //     ],
-      //   });
-      //   $('#active-major').text(major + ' Majors');
-      //   e.preventDefault();
-      // });
+      $('#school-filter').submit(function(e) {
+        e.preventDefault();
+        var school = $('#active-school').val();
+        var i = schools.indexOf(school);
+        var selector = '.c3-event-rect-' + i;
+        var x = d3.select(selector).attr('x');
+        var y = 0;
+        var w = d3.select(selector).attr('width');
+        var h = d3.select(selector).attr('height');
+        
+        d3.select('g').append('rect')
+          .attr('x', x)
+          .attr('y', y)
+          .attr('width', w)
+          .attr('height', h)
+          .style('fill', '#1f77b4')
+          .style('fill-opacity', '0.25');
+
+        d3.select('g').append('text')
+          .append('tspan')
+            .attr('x', x)
+            .attr('y', yText)
+            .text(school)
+          .append('tspan')
+            .attr('x', x)
+            .attr('y', yText + 15)
+            .text('Cost: ' + cost[i])
+          .append('tspan')
+            .attr('x', x)
+            .attr('y', yText + 30)
+            .text('ROI: ' + colData[i]);
+
+        yText += 50;
+      });
 
     });
   
@@ -89,6 +117,8 @@ $(function () {
     displayKey: 'value',
     source: substringMatcher(majors)
   });
+
+  
 });
 
 
@@ -100,8 +130,8 @@ $(function () {
 BASIC REQUIREMENTS
 [x] Convert to vertical bars
 [x] On hover of a bar, display attributes of that School
-[ ] Sort (auto or sort button?)
-[ ] Search for school, highlight that bar, use typeahead
+[x] Sort (auto or sort button?)
+[x] Search for school, highlight that bar, use typeahead
 [x] Filter by major data
 [x] Display cost as a stack
 
