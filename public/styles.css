@@ -9,13 +9,10 @@ body {
   text-align: center;
 }
 
-.filter {
-  width: 200px;
-  /*float: left;*/
-}
-
 .form-group {
   display: inline-flex;
+  width: 300px;
+  float: left;
 }
 
 .right-btn {
@@ -25,9 +22,11 @@ body {
 
 input[type="text"] {
   border-radius: 4px 0px 0px 4px;
+  width: 200px;
 }
 
 #chart {
+  clear: left;
   margin: 20px 0px 50px 0px;
 }
 
