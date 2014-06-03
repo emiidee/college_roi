@@ -2,20 +2,6 @@
 var major = 'All';
 var aid = 'withoutAid';
 var roi = 'netROI';
-var majors = [
-  'All',
-  'Art',
-  'Business',
-  'Computer Science',
-  'Economics',
-  'Education',
-  'English',
-  'Humanities',
-  'Life Sciences',
-  'Mathematics',
-  'Nursing',
-  'Political Science',
-];
 var schools = [];
 var cost = [];
 var colData = [];
@@ -43,9 +29,10 @@ $(function () {
       var yText = 10;
 
       // Set listener for the major filter
-      $('#major-filter').submit(function(e) {
+      $('#major-filter').change(function(e) {
+        e.preventDefault();
         // Reset global major variable
-        major = $('#active-major').val();
+        major = $('option:selected').text();
         yText = 10;
 
         // Filter undefined data
@@ -65,7 +52,6 @@ $(function () {
         // Regenerate Chart
         genChart(d, cost, colData);
         $('#active-major').text(major + ' Majors');
-        e.preventDefault();
       });
 
       // Listener to highlight current school
@@ -105,20 +91,7 @@ $(function () {
       });
 
     });
-  
-  // Typeahead
-  $('#major-filter .typeahead').typeahead({
-    hint: true,
-    highlight: true,
-    minLength: 1
-  },
-  {
-    name: 'majors',
-    displayKey: 'value',
-    source: substringMatcher(majors)
-  });
 
-  
 });
 
 
