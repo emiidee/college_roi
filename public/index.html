@@ -13,10 +13,10 @@
         <div class="container">
           <ul class="nav navbar-nav navbar-right">
             <li><a class="navbar-brand" href="#">Join the Discussion</a></li>
-            <li><a href="https://twitter.com/share" class="twitter-share-button">Tweet</a></li>
-            <!-- share on twitter https://about.twitter.com/resources/buttons#tweet -->
-            <!-- share on fb https://developers.facebook.com/docs/plugins/share-button/-->
             <!-- share on hn https://github.com/igrigorik/hackernews-button -->
+            <li class="social hn"><a href="http://news.ycombinator.com/submit" class="hn-share-button" data-title="College ROI">Vote on HN</a></li>
+            <li><a href="https://twitter.com/share" class="twitter-share-button social">Tweet</a></li>
+            <li><div class="fb-share-button social" data-href="http://collegeroi.azurewebsites.net/" data-type="button_count"></div></li>
           </ul>
         </div>
       </nav>
@@ -31,10 +31,9 @@
         <p class="lead"><strong>About this Project:</strong>  This is a visualization of 20 year net return on investment data (ROI) by college</p>
         
         <p class="instructions"><strong>Instructions:</strong></p>
-        <p class="instructions">Hover over each bar to see exact ROI and cost data for that college. Filter by one of the following majors for a closer look at the data: Art, Humanities, Computer Science, Mathematics, Business, Economics, Nursing, Life Sciences, Political Science, History, English, Education, or default back to All</p>
+        <p class="instructions">Hover over each bar to see exact ROI and cost data for that college,  filter by one of the available majors to see how majors affect the ROI of a particular school, or enter the name of a school to see where it falls on the chart.</p>
         
         <div class="filters">
-          <!-- <h4>See how majors affect ROI</h4> -->
           <form class="filter">
             <div class="form-group">
               <select class="form-control" id="major-filter">
@@ -56,7 +55,6 @@
             </div>
           </form>
 
-          <!-- <h4>Find your school</h4> -->
           <form class="filter" id="school-filter">
             <div class="form-group">
               <input id="active-school" type="text" class="form-control typeahead" placeholder="Find your school">
@@ -95,12 +93,33 @@
     <script src="../bower_components/typeahead.js/dist/typeahead.jquery.min.js" charset="utf-8"></script>
     <script src="../bower_components/underscore/underscore.js" charset="utf-8"></script>
     
-    <!-- <script src="../dist/built.min.js"></script> -->
-    <script src="../client/college_roi.js"></script>
+    <script src="../dist/built.min.js"></script>
+    <!-- <script src="../client/college_roi.js"></script>
     <script src="../client/college_roi_helpers.js"></script>
-    <script src="../client/data_parse.js"></script>
+    <script src="../client/data_parse.js"></script> -->
 
     <!-- Sharing plugins -->
-    <!-- <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> -->
+    <script>
+      // Twitter
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+      
+      // Facebook
+      // <div id="fb-root"></div>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=217643224962390&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+      
+      // Hackernews
+      (function(d, t) {
+        var g = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        g.src = '//hnbutton.appspot.com/static/hn.min.js';
+        s.parentNode.insertBefore(g, s);
+      }(document, 'script'));
+    </script>
   </body>
 </html>

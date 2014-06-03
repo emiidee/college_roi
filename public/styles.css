@@ -9,6 +9,14 @@ body {
   text-align: center;
 }
 
+.social {
+  margin-top: 14px;
+}
+
+.hn {
+  width: 90px;
+}
+
 .form-group {
   display: inline-flex;
   margin-right: 20px;
