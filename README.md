@@ -1,5 +1,5 @@
 # College ROI
-===========
+
 ## About this project
 This project visualizes college ROI data from PayScale's 2014 report http://www.payscale.com/college-roi/full-list. Colleges are typically evaluated by their rankings on various public lists such as the US News Report. This project aims to focus the discussion of college rank around return on investment which is based on an earnings differential ("the difference between the 20 Year Median Pay for a 2013 Bachelor’s Graduate and Weighted 24-26 Year Median Pay for a High School") and the cost of tuition. Read about how PayScale's methodology for formulating this data set here: http://www.payscale.com/college-roi/c/methodology
 
