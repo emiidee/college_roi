@@ -6,6 +6,7 @@ This project visualizes college ROI data from PayScale's 2014 report http://www.
 The data can be filtered by the ROI for a specific major and you can select specific schools to see where they rank.
 
 See the deployed app at http://collegeroi.emilydee.com/
+
 ![alt tag](http://emilydeedotcom1.files.wordpress.com/2014/06/screen-shot-2014-06-03-at-5-30-22-pm.png?w=630&h=319)
 
 ## Tech Stack and Code Structure
